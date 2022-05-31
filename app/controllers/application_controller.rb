@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-    respond_to :json, :html
+  respond_to :json, :html
 
   skip_before_action :verify_authenticity_token
   protect_from_forgery with: :null_session
@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   private
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :profile, :bio])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name profile bio])
   end
 end

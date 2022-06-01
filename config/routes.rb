@@ -7,7 +7,8 @@ Rails.application.routes.draw do
     get 'users', to: 'users#index'
 
     resources :posts do
-      resources :comments, only: [:create, :destroy]
+      resources :comments, only: [:create, :destroy] 
+      resources :likes, only: [:create, :destroy]
     end
   end
 end

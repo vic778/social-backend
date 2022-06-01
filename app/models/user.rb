@@ -9,7 +9,8 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }
   validates :password_confirmation, presence: true
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   def generate_jwt
     JWT.encode({ id: id, exp: 30.days.from_now.to_i }, 'vicSecret')

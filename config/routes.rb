@@ -5,5 +5,7 @@ Rails.application.routes.draw do
     resource :user, only: [:update]
     get 'user/auto_login', to: 'users#auto_login'
     get 'users', to: 'users#index'
+
+    resources :posts
   end
 end

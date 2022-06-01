@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :following, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :followers, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
 
   def generate_jwt
     JWT.encode({ id: id, exp: 30.days.from_now.to_i }, 'vicSecret')

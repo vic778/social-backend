@@ -6,7 +6,12 @@ class UsersController < PermissionsController
     render json: @users
   end
 
-  def show; end
+  def show
+    @user = User.find(params[:id])
+    @rel = @user.relationships.find_by(follower_id: current_user.id)
+    @like = @user.likes.find_by(user_id: current_user.id)
+    render json: @user
+  end
 
   def update
     if current_user.update!(user_params)

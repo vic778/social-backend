@@ -9,7 +9,7 @@ This API is made these models:
 - Like
 
 ### Deployment
-[Base URL](https://sheltered-tor-84017.herokuapp.com/)
+[Base URL](https://infinite-cliffs-78360.herokuapp.com/)
 
 
 The API has the following endpoints:

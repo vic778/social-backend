@@ -3,39 +3,39 @@ class PostsController < PermissionsController
   before_action :set_post, only: %i[update destroy]
 
   def index
-    @posts = Post.all.order('created_at DESC')
-    render json: @posts
+    osts = Post.all.order('created_at DESC')
+    render json: posts
   end
 
   def show
-    @post = Post.find(params[:id])
-    render json: @post
+    post = Post.find_by(id: params[:id])
+    render json: post
   end
 
   def create
-    @post = Post.create(post_params.merge(user_id: current_user.id))
-    if @post.save
-      render json: { success: true, message: "Post created successfully", post: @post }, status: :created
+    post = current_user.posts.create(post_params)
+    if post.save
+      render json: { success: true, message: "Post created successfully", post: post }, status: :created
     else
-      render json: { success: false, message: @post.errors.full_messages }, status: 422
+      render json: { success: false, message: post.errors.full_messages }, status: 422
     end
   end
 
   def update
-    @post = Post.find(params[:id])
-    if @post.update(post_params)
-      render json: { success: true, message: "Post updated successfully", post: @post }, status: :ok
+    post = Post.find(params[:id])
+    if post.update(post_params)
+      render json: { success: true, message: "Post updated successfully", post: post }, status: :ok
     else
-      render json: { success: false, message: @post.errors.full_messages, post: @post }, status: 422
+      render json: { success: false, message: post.errors.full_messages, post: post }, status: 422
     end
   end
 
   def destroy
-    @post = Post.find(params[:id])
-    if @post.destroy
-      render json: { success: true, message: "Post deleted successfully", post: @post }, status: :ok
+    post = Post.find(params[:id])
+    if post.destroy
+      render json: { success: true, message: "Post deleted successfully", post: post }, status: :ok
     else
-      render json: { success: false, message: @post.errors.full_messages, post: @post }, status: 422
+      render json: { success: false, message: post.errors.full_messages, post: post }, status: 422
     end
   end
 
@@ -46,6 +46,6 @@ class PostsController < PermissionsController
   end
 
   def post_params
-    params.permit(:image, :description, :video, :user_id)
+    params.permit(:image, :description, :video)
   end
 end

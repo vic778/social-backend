@@ -22,11 +22,11 @@ class PostsController < PermissionsController
   end
 
   def update
-    @post = Post.find(params[:id])
-    if @post.update(post_params)
-      render json: { success: true, message: "Post updated successfully", post: @post }, status: :ok
+    post = Post.find(params[:id])
+    if post.update(post_params)
+      render json: { success: true, message: "Post updated successfully", post: post }, status: :ok
     else
-      render json: { success: false, message: @post.errors.full_messages, post: @post }, status: 422
+      render json: { success: false, message: post.errors.full_messages, post: post }, status: 422
     end
   end
 

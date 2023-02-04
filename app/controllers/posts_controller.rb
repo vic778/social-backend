@@ -13,8 +13,11 @@ class PostsController < PermissionsController
   end
 
   def create
-    @post = Post.create(post_params.merge(user_id: current_user.id))
+    @post = current_user.posts.create(post_params)
+    
+    
     if @post.save
+      # binding.pry
       render json: { success: true, message: "Post created successfully", post: @post }, status: :created
     else
       render json: { success: false, message: @post.errors.full_messages }, status: 422
@@ -46,6 +49,6 @@ class PostsController < PermissionsController
   end
 
   def post_params
-    params.permit(:image, :description, :video, :user_id)
+    params.permit(:image, :description, :video)
   end
 end

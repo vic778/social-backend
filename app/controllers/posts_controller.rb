@@ -13,14 +13,11 @@ class PostsController < PermissionsController
   end
 
   def create
-    @post = current_user.posts.create(post_params)
-    
-    
-    if @post.save
-      # binding.pry
-      render json: { success: true, message: "Post created successfully", post: @post }, status: :created
+    post = current_user.posts.create(post_params)
+    if post.save
+      render json: { success: true, message: "Post created successfully", post: post }, status: :created
     else
-      render json: { success: false, message: @post.errors.full_messages }, status: 422
+      render json: { success: false, message: post.errors.full_messages }, status: 422
     end
   end
 

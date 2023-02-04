@@ -8,9 +8,9 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
-# set the host for the image url
+  # set the host for the image url
 
- def image_url
-  Rails.application.routes.url_helpers.url_for(image) if image.attached?
- end
+  def image_url
+    Rails.application.routes.url_helpers.url_for(image) if image.attached?
+  end
 end

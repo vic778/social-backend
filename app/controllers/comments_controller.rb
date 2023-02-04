@@ -18,7 +18,7 @@ class CommentsController < PermissionsController
     if comment.destroy
       render json: { success: true, message: "Comment deleted successfully" }, status: :ok
     else
-      render json: { success: false, message: comment.errors.full_messages}, status: 422
+      render json: { success: false, message: comment.errors.full_messages }, status: 422
     end
   end
 

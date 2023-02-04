@@ -31,11 +31,11 @@ class PostsController < PermissionsController
   end
 
   def destroy
-    @post = Post.find(params[:id])
-    if @post.destroy
-      render json: { success: true, message: "Post deleted successfully", post: @post }, status: :ok
+    post = Post.find(params[:id])
+    if post.destroy
+      render json: { success: true, message: "Post deleted successfully", post: post }, status: :ok
     else
-      render json: { success: false, message: @post.errors.full_messages, post: @post }, status: 422
+      render json: { success: false, message: post.errors.full_messages, post: post }, status: 422
     end
   end
 

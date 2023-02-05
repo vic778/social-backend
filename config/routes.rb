@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     get 'users', to: 'users#index'
     get 'users/:id', to: 'users#show'
     post 'users/:id/relationships', to: 'relationships#create'
-    delete 'users/:id/relationships', to: 'relationships#destroy'
+    delete 'users/:id/unfollow', to: 'relationships#destroy'
       
     resources :posts do
       resources :comments, only: [:create, :destroy] 

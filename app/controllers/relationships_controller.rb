@@ -20,5 +20,4 @@ class RelationshipsController < PermissionsController
       render json: { status: :error }
     end
   end
-
 end
